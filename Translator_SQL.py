@@ -27,14 +27,3 @@ def requests_sql(a,b,c):
         result = f"SELECT {choice_post} FROM {post}"
 
     return result
-
-
-
-
-
-
-
-
-# massive1 = ["Сколько", "Максимальное", "Минимальное", "Количество", "Все", ] # SELECT
-# if s in  any({[сколько, количество]: 'count'}.keys()): request += count
-# if s in  ({"Максимальное" : 'max'}.keys())
