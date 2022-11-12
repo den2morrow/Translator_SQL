@@ -9,7 +9,7 @@ def button_press():
     name_of_table = entry1.get()
     funct = entry2.get()
     name_of_colomn = entry3.get()
-    if cb1Enabled==1:
+    if cb1Enabled !=0 :
         flag_where = True
         post_where = entry5.get()
         post_condition = entry6.get()
@@ -17,7 +17,7 @@ def button_press():
         flag_where = False
         post_where = '' 
         post_condition = ''
-    if cb2Enabled==1:
+    if cb2Enabled != 0:
         flag_order_by = True
         post_order_by = entry7.get()
         if combx1.get()== "Возрастание":
@@ -28,7 +28,7 @@ def button_press():
         flag_order_by = False
         post_order_by = ''
         asc_desc = False
-    if cb3Enabled==1:
+    if cb3Enabled != 0:
         flag_limit = True
         post_limit = entry8.get()
     else:
