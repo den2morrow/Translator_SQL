@@ -1,4 +1,3 @@
-from Interfece import *
 def requests_sql(a,b,c):
 
     post = a
