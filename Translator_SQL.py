@@ -1,4 +1,4 @@
-def requests_sql(name_of_table='', funct='' , name_of_colomn='', flag_where=False, post_where='', flag_order_by=False, post_order_by='', asc_desc=True, flag_limit=False, post_limit=''):
+def requests_sql(name_of_table='', funct='' , name_of_colomn='', flag_where=False, post_where='', post_condition='', flag_order_by=False, post_order_by='', asc_desc=True, flag_limit=False, post_limit=''):
 
     post = name_of_table
     aggregate_function = ''

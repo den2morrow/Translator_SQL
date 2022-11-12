@@ -6,11 +6,42 @@ from tkinter import messagebox
 from tkinter.ttk import Combobox
 from Translator_SQL import *
 def button_press():
-    a = entry1.get()
-    b = entry2.get()
-    c = entry3.get()
+    name_of_table = entry1.get()
+    funct = entry2.get()
+    name_of_colomn = entry3.get()
+    if cb1Enabled==1:
+        flag_where = True
+        post_where = entry5.get()
+        post_condition = entry6.get()
+    else:
+        flag_where = False
+        post_where = '' 
+        post_condition = ''
+    if cb2Enabled==1:
+        flag_order_by = True
+        post_order_by = entry7.get()
+        if combx1.get()== "Возрастание":
+            asc_desc = False
+        else:
+            asc_desc = True
+    else:
+        flag_order_by = False
+        post_order_by = ''
+        asc_desc = False
+    if cb3Enabled==1:
+        flag_limit = True
+        post_limit = entry8.get()
+    else:
+        flag_limit = False
+        post_limit = ''
 
-    result = requests_sql(a,b,c)
+
+
+
+
+
+
+    result = requests_sql(name_of_table, funct, name_of_colomn, flag_where, post_where, post_condition, flag_order_by, post_order_by, asc_desc, flag_limit, post_limit)
     entry4.delete(0, END)
     entry4.insert(0, result)
 def cb1foo():
