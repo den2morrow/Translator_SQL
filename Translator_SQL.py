@@ -25,18 +25,18 @@ def requests_sql(name_of_table='', funct='' , name_of_colomn='', flag_where=Fals
         result = f"SELECT {choice_post} FROM {post}"
 
     if flag_where:
-        where = post_where
-        result += f"WHERE {where}"
+        where = post_where + post_condition
+        result += f" WHERE {where}"
 
     if flag_order_by:
-        order_by = post_order_by
-        result += f"ORDER BY {order_by}"
-        if not(asc_desc):
-            result += 'DESC'
+        order = post_order_by
+        result += f" ORDER BY {order}"
+        if asc_desc:
+            result += ' DESC'
 
     if flag_limit:
         limit = post_limit
-        result += f"LIMIT {limit}"
+        result += f" LIMIT {limit}"
 
 
     return result
