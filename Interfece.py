@@ -34,16 +34,57 @@ def button_press():
     else:
         flag_limit = False
         post_limit = ''
+    if cb4Enabled.get() != 0:
+        flag_uniq = True
+    else:
+        flag_uniq = False
 
 
 
-
-
-
-
-    result = requests_sql(name_of_table, funct, name_of_colomn, flag_where, post_where, post_condition, flag_order_by, post_order_by, asc_desc, flag_limit, post_limit)
+    distinct=''
+    result = requests_sql(name_of_table, funct, name_of_colomn, flag_uniq, distinct, flag_where, post_where, post_condition, flag_order_by, post_order_by, asc_desc, flag_limit, post_limit)
     entry4.delete(0, END)
     entry4.insert(0, result)
+
+class ToolTip(object):
+
+    def __init__(self, widget):
+        self.widget = widget
+        self.tipwindow = None
+        self.id = None
+        self.x = self.y = 0
+
+    def showtip(self, text):
+        "Display text in tooltip window"
+        self.text = text
+        if self.tipwindow or not self.text:
+            return
+        x, y, cx, cy = self.widget.bbox("insert")
+        x = x + self.widget.winfo_rootx() + 30
+        y = y + cy + self.widget.winfo_rooty() +5
+        self.tipwindow = tw = Toplevel(self.widget)
+        tw.wm_overrideredirect(1)
+        tw.wm_geometry("+%d+%d" % (x, y))
+        label = Label(tw, text=self.text, justify=LEFT,
+                      background="#ffffe0", relief=SOLID, borderwidth=1,
+                      font=("Courier New", "12", "normal"))
+        label.pack(ipadx=1)
+
+    def hidetip(self):
+        tw = self.tipwindow
+        self.tipwindow = None
+        if tw:
+            tw.destroy()
+
+def CreateToolTip(widget, text):
+    toolTip = ToolTip(widget)
+    def enter(event):
+        toolTip.showtip(text)
+    def leave(event):
+        toolTip.hidetip()
+    widget.bind('<Enter>', enter)
+    widget.bind('<Leave>', leave)
+
 def cb1foo():
     global label6,label7,entry6,entry5
     if cb1Enabled.get() != 0:
@@ -76,6 +117,9 @@ def cb3foo():
     else:
         label10['state']=DISABLED
         entry8['state']=DISABLED
+def cb4foo():
+    return 0
+    
 SIZET = 14
 
 
@@ -84,7 +128,7 @@ SIZET = 14
 
 window = Tk()
 window.title("")
-window.resizable(width=False, height=False)
+#window.resizable(width=False, height=False)
 window.geometry("970x440")
 window.iconbitmap()
 label1 = Label(
@@ -145,7 +189,10 @@ label10.place(x=330,y=260)
 entry8 = Entry(width=25,font=('Courier New',SIZET), state=DISABLED)
 entry8.place(x=330,y=290)
 
-
+cb4Enabled = IntVar()
+cb4 = Checkbutton(variable=cb4Enabled, command=cb4foo)
+cb4.place(x=950,y=80)
+CreateToolTip(cb4,text = "Уникальность записей")
 
 
 button1 = Button(

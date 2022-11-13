@@ -1,7 +1,8 @@
-def requests_sql(name_of_table='', funct='' , name_of_colomn='', flag_uniq=False, flag_where=False, post_where='', post_condition='', flag_order_by=False, post_order_by='', asc_desc=True, flag_limit=False, post_limit=''):
+def requests_sql(name_of_table='', funct='' , name_of_colomn='', flag_uniq=False, distinct='', flag_where=False, post_where='', post_condition='', flag_order_by=False, post_order_by='', asc_desc=True, flag_limit=False, post_limit=''):
 
     post = name_of_table
     aggregate_function = ''
+    distinct = ''
 
     dict_aggregate_functions = {
         ('max', "максимальное", "наибольший") : 'max',
@@ -19,13 +20,14 @@ def requests_sql(name_of_table='', funct='' , name_of_colomn='', flag_uniq=False
 
     choice_post = name_of_colomn
 
-    if choice_aggregate_function != '':
-        result = f"SELECT {aggregate_function}({choice_post}) FROM {post}"
-    else:
-        result = f"SELECT {choice_post} FROM {post}"
-
     if flag_uniq:
-        result += f" DISTINCT"
+        distinct = 'DISTINCT'
+
+    if choice_aggregate_function != '':
+        result = f"SELECT {aggregate_function}({distinct} {choice_post}) FROM {post}"
+    else:
+        result = f"SELECT {distinct}{choice_post} FROM {post}"
+
 
     if flag_where:
         where = post_where + post_condition
