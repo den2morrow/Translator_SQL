@@ -35,6 +35,10 @@ pip install -r requirements.txt
 python main.py
 ```
 
+Либо же скачайте <b>main.exe<b> программу из releases и запустите на компьютере
+```bash
+main.exe
+```
 
 ## Замечания
 
